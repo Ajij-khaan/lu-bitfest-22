@@ -1,6 +1,6 @@
 import imp
 from django.urls import path
-from transport.views import *
+from .views import *
 
 urlpatterns = [
 

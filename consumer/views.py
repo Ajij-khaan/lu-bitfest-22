@@ -1,5 +1,6 @@
 
 from django.shortcuts import redirect, render
+from consumer.views import *
 
 
 def home(request):

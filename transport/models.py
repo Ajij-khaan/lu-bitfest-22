@@ -9,4 +9,4 @@ class BusInfo(models.Model):
     capacity = models.IntegerField()
     drive_name = models.CharField(max_length=100)
     driver_contact = models.IntegerField()
-    is_active = models.BooleanField()
+    is_active = models.BooleanField(default=False)

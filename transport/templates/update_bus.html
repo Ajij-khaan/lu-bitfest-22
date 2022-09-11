@@ -1,0 +1,42 @@
+{% extends 'base.html' %} <br />
+{% load static %} <br />
+{% block title %}Update Bus{% endblock title %} <br />
+{% block content %} <br />
+
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <li
+    {%
+    if
+    message.tags
+    %}
+    class="bg-{{ message.tags }} p-4 text-center"
+    {%
+    endif
+    %}
+  >
+    {{ message }}
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<div class="container">
+  <h1 class="mt-5 mb-5 text-center">Update Bus</h1>
+  <form action="" method="POST" class="w-50 m-auto box-shadow">
+    {% csrf_token %} {% for fm in form %}
+
+    <div class="field-wrap">
+      {{fm.label_tag}} {{fm}}
+      <p class="text-danger">{{fm.errors|striptags}}</p>
+    </div>
+
+    {% endfor %}
+
+    <br />
+    <button type="submit" class="btn btn-primary">Update Bus</button>
+  </form>
+</div>
+
+{% endblock content %}
