@@ -1,0 +1,50 @@
+{% extends 'base.html' %} <br />
+{% block title %}Login Transport{% endblock title %} <br />
+{% load static %} {% block content %} <br />
+
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <li
+    {%
+    if
+    message.tags
+    %}
+    class="bg-{{ message.tags }} p-4 text-center"
+    {%
+    endif
+    %}
+  >
+    {{ message }}
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<div class="container">
+  <h1 class="mt-5 mb-5 text-center">Consumer Login</h1>
+
+  <form action="" method="POST" class="w-50 m-auto box-shadow">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" name="username" />
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="exampleInputPassword1"
+        name="password"
+      />
+    </div>
+    <a href="/consumer_register" class="d-block text-decoration-none"
+      >Create new Account</a
+    >
+    <br />
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+</div>
+
+{% endblock content %}
