@@ -1,7 +1,26 @@
+from pyexpat import model
+from statistics import mode
+from tkinter import CASCADE
+from typing import ValuesView
 from django.db import models
 from mainapp.models import TransportUser, ConsumerUser
 
 # Create your models here.
+Choice_Type = (
+    ('Student', 'Student'),
+    ('Teacher', 'Teacher'),
+    ('Staff', 'Staff'),
+)
+
+Pickup_time = (
+    ('8 AM', '8 AM'),
+    ('9 AM', '9 AM'),
+    ('10 AM', '10 AM'),
+    ('11 AM', '11 AM'),
+    ('12 PM', '12 PM'),
+    ('1 PM', '1 PM'),
+
+)
 
 
 Pickup_type = (
@@ -21,6 +40,16 @@ Pickup_type = (
     ('Rikabi Bazar', 'Rikabi Bazar'),
     ('Humayun Cattar', 'Humayun Cattar'),
     ('Sibgonj', 'Sibgonj'),
+
+)
+
+Pickup_time = (
+    ('8 AM', '8 AM'),
+    ('9 AM', '9 AM'),
+    ('10 AM', '10 AM'),
+    ('11 AM', '11 AM'),
+    ('12 PM', '12 PM'),
+    ('1 PM', '1 PM'),
 
 )
 
@@ -50,7 +79,11 @@ class RouteInfo(models.Model):
     label = models.CharField(
         max_length=20, choices=Pickup_type, default='Tilagor')
     lattitude = models.FloatField()
-    start_time = models.TimeField(auto_now=False, auto_now_add=False)
+    start_time = models.CharField(
+        max_length=20, choices=Pickup_time, default='8 AM')
+
+    def __str__(self):
+        return f"Route - {self.Route_Number}- Time: {self.start_time}"
 
 
 class UpdateTransportProfile(models.Model):
@@ -68,3 +101,28 @@ class UpdateStudentProfile(models.Model):
     fullname = models.CharField(max_length=100)
     batch = models.IntegerField()
     section = models.CharField(max_length=100)
+
+
+class SendMeessage(models.Model):
+    request_user = models.ForeignKey(ConsumerUser, on_delete=models.CASCADE)
+
+    root = models.ForeignKey(RouteInfo, on_delete=models.CASCADE)
+
+    message = models.TextField()
+
+
+class NumberOfPassenger(models.Model):
+    role = models.CharField(
+        max_length=20, choices=Choice_Type, default='Student')
+
+    numberofpass = models.IntegerField()
+    mainslot = models.ForeignKey(
+        RouteInfo, on_delete=models.CASCADE, related_name="time_view")
+    date_time = models.DateTimeField(auto_now_add=True)
+
+
+class BusStopage(models.Model):
+    route_number = models.IntegerField()
+    label = models.CharField(
+        max_length=20, choices=Pickup_type, default='Tilagor')
+    lattitude = models.CharField(max_length=120)

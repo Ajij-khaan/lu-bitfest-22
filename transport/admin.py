@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BusInfo, RouteInfo, UpdateTransportProfile, UpdateStudentProfile
+from .models import BusInfo, RouteInfo, UpdateTransportProfile, UpdateStudentProfile, SendMeessage
 # Register your models here.
 
 
@@ -20,4 +20,9 @@ class UpdateTransportProfileInfoAdmin(admin.ModelAdmin):
 
 @admin.register(UpdateStudentProfile)
 class UpdateStudentProfileAdmin(admin.ModelAdmin):
+    list_display = ['id']
+
+
+@admin.register(SendMeessage)
+class SendMeessageAdmin(admin.ModelAdmin):
     list_display = ['id']

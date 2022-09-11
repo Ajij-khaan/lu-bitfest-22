@@ -1,0 +1,126 @@
+{% extends 'base_student.html' %} <br />
+{% load static %} <br />
+{% block title %}Route Show{%endblock title %} <br />
+{% block content %}
+
+<style>
+  table {
+    font-family: "Inter", sans-serif;
+    text-align: center;
+    border-right: 1px solid green;
+    border-left: 1px solid green;
+  }
+  thead {
+    top: 0;
+    position: sticky;
+    background: #000;
+    color: white;
+  }
+  
+  table,tr,td
+  {
+    border: 1px solid black;
+    text-align: center;
+    justify-content: center;
+  }
+
+  tbody tr,
+  thead tr {
+    position: relative;
+  }
+  tbody th {
+    position: sticky;
+    left: 0;
+  }
+  #myInput:focus{
+    border:1px solid black;
+  }
+
+  .form-control:focus {
+    box-shadow: none;
+    }
+ 
+</style>
+
+
+<div class="container">
+
+   
+  <h1 class="alert alert-light border rounded text-center">All Routes</h1>
+  {% if messages %} <br>
+  {% for message in messages %}
+  <p
+    {%
+    if
+    message.tags
+    %}
+    class="alert alert-{{message.tags}} mb-5"
+    {%
+    endif
+    %}
+  >
+    {{message}}
+  </p>
+  {% endfor %} 
+  {% endif %}  
+
+ 
+
+  <input
+    class="form-control mb-3"
+    type="text"
+    name=""
+    id="myInput"
+    placeholder="Search.."
+    onkeyup="searchFun()"
+  />
+  <table class="table table-striped" id="myTable">
+    <thead>
+      <tr>
+        <th>Route Number</th>
+        <th>Start Location</th>
+        <th>Latitude & Longititude</th>
+        <th>Start Time</th>
+      
+      </tr>
+    </thead>
+    <tbody>
+      {% for route in allroute %}
+      <tr>
+       
+        <td>{{route.Route_Number}}</td>
+        <td>{{route.label}}</td>
+        <td>{{route.lattitude}}</td>
+        <td>{{route.start_time}}</td>
+      
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+<script>
+  const searchFun = () => {
+    let filter = document.getElementById("myInput").value.toUpperCase();
+
+    let myTable = document.getElementById("myTable");
+    let tr = myTable.getElementsByTagName("tr");
+
+    for (var i = 0; i < tr.length; i++) {
+      let td = tr[i].getElementsByTagName("td")[3];
+
+      if (td) {
+        let textvalue = td.textContent || td.innerHTML;
+        if (textvalue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  };
+</script>
+</div>
+{% endblock content %}

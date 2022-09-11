@@ -1,13 +1,35 @@
-from pyexpat import model
 from django.db import models
+from transport.models import RouteInfo
+from mainapp.models import ConsumerUser
 
-# Create your models here.
+
+Choice_Type = (
+    ('Student', 'Student'),
+    ('Teacher', 'Teacher'),
+    ('Staff', 'Staff'),
+)
+
+Pickup_time = (
+    ('8 AM', '8 AM'),
+    ('9 AM', '9 AM'),
+    ('10 AM', '10 AM'),
+    ('11 AM', '11 AM'),
+    ('12 PM', '12 PM'),
+    ('1 PM', '1 PM'),
+
+)
 
 
-class BusInfo(models.Model):
-    license_number = models.CharField(max_length=100)
-    codename = models.CharField(max_length=100)
-    capacity = models.IntegerField()
-    drive_name = models.CharField(max_length=100)
-    driver_contact = models.IntegerField()
-    is_active = models.BooleanField()
+class RequestBus(models.Model):
+    user = models.ForeignKey(ConsumerUser, on_delete=models.CASCADE)
+    root_bus = models.ForeignKey(
+        RouteInfo, on_delete=models.CASCADE)
+
+
+class NumberOfPassenger(models.Model):
+    role = models.CharField(
+        max_length=20, choices=Choice_Type, default='Student')
+
+    numberofpass = models.IntegerField()
+    time_slot = models.ForeignKey(
+        RouteInfo, on_delete=models.CASCADE)

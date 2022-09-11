@@ -14,7 +14,13 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Home</title>
   </head>
   <body>
@@ -40,33 +46,12 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'addbus' %}">Add Bus</a>
+              <a class="nav-link" href="{% url 'busrequest' %}">Request Bus</a>
             </li>
-
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'number_of_passeneger' %}"
+                >Number Of Passenger</a
               >
-                Route
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <a class="dropdown-item" href="{% url 'allroute' %}"
-                    >All Route</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="{% url 'addroute' %}"
-                    >Add Route</a
-                  >
-                </li>
-                <li><hr class="dropdown-divider" /></li>
-              </ul>
             </li>
           </ul>
           <div class="d-flex">
@@ -83,7 +68,7 @@
             {% if updateprofilestudent or updateprofileteacher %}
             <a
               href="{% url 'showprofilfe' %}"
-              class="btn btn-outline-success"
+              class="btn btn-outline-success ms-4"
               type="submit"
             >
               Show Profile
@@ -91,12 +76,21 @@
             {% else %}
             <a
               href="{% url 'addprofile' %}"
-              class="btn btn-outline-success"
+              class="btn btn-outline-success ms-4"
               type="submit"
             >
               Add Profile
             </a>
+
             {% endif %}
+
+            <a
+              href="{% url 'notifiactionbus' %}"
+              class="btn btn-outline-success ms-4"
+              type="submit"
+            >
+              <i class="fa-solid fa-bell"></i>
+            </a>
           </div>
         </div>
       </div>

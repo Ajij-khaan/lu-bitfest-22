@@ -2,7 +2,7 @@ from cProfile import label
 import code
 from django.contrib.auth.models import User
 from django import forms
-from .models import BusInfo, RouteInfo
+from .models import BusInfo, RouteInfo, SendMeessage, NumberOfPassenger
 from django.utils.translation import gettext_lazy as _
 from mainapp.models import TransportUser
 from transport.models import UpdateTransportProfile
@@ -42,9 +42,9 @@ class RouteSignForm(forms.ModelForm):
 
         widgets = {
             'Route_Number': forms.NumberInput(attrs={'placeholder': 'Route Number', 'class': 'form-control'}),
-            'label': forms.TextInput(attrs={'placeholder': 'Label', 'class': 'form-control'}),
+            'label': forms.Select(attrs={'placeholder': 'Label', 'class': 'form-control'}),
             'lattitude': forms.NumberInput(attrs={'placeholder': 'Latittude', 'class': 'form-control'}),
-            'start_time': forms.TimeInput(attrs={'type': 'time'})
+            'start_time': forms.Select(attrs={'placeholder': 'Latittude', 'class': 'form-control'})
         }
 
 
@@ -57,4 +57,28 @@ class UpdateProfileForm(forms.ModelForm):
             'department': forms.Select(attrs={'placeholder': 'Department', 'class': 'form-control'}),
             'codename': forms.TextInput(attrs={'placeholder': 'Codename', 'class': 'form-control'}),
             'designation': forms.TextInput(attrs={'placeholder': 'Designation', 'class': 'form-control'}),
+        }
+
+
+class SendMessageForm(forms.ModelForm):
+    class Meta:
+        model = SendMeessage
+        fields = ['message']
+
+        widgets = {
+            'message': forms.TextInput(attrs={'placeholder': 'message', 'class': 'form-control'}),
+
+        }
+
+
+class AddpassForm(forms.ModelForm):
+    class Meta:
+        model = NumberOfPassenger
+        fields = ['role', 'numberofpass', 'mainslot']
+
+        widgets = {
+            'role': forms.Select(attrs={'class': 'form-control'}),
+            'numberofpass': forms.NumberInput(attrs={'class': 'form-control'}),
+            'mainslot': forms.Select(attrs={'class': 'form-control'}),
+
         }

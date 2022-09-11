@@ -13,6 +13,9 @@ urlpatterns = [
     path('addroute', AddRouteView.as_view(), name="addroute"),
     path('updateroute/<int:id>/', EditRouteInfo.as_view(), name="updateroute"),
     path('deleteroute/<int:id>/', DeleteRouteInfo.as_view(), name="deleteroute"),
+    path('showrequest', ShowrequestView.as_view(), name="showrequest"),
+    path('addmessage/<int:id>/', AddmessageView.as_view(), name="addmessage"),
+    path('addpassview', AddpassView.as_view(), name="addpassview"),
     path('logout', logout, name="logout"),
-    
+
 ]

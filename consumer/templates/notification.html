@@ -1,0 +1,36 @@
+{% extends 'base_student.html' %} <br />
+{% load static %} <br />
+{% block title %}Notifiction{%endblock title %} <br />
+
+{% block content %}
+
+<style>
+  li {
+    color: black !important;
+  }
+</style>
+
+{% if mymessage %}
+<div class="container mt-5 text-dark">
+  <ol class="list-group">
+    {% for message in mymessage %}
+    <li
+      class="list-group-item d-flex justify-content-between align-items-start"
+    >
+      <div class="ms-2 me-auto">
+        <div class="fw-bold" style="font-size: 2rem">{{message.message}}</div>
+        Route : {{message.root.Route_Number}} Start Time:
+        {{message.root.start_time}}
+      </div>
+      <span class="badge bg-primary rounded-pill"
+        ><a href="{% url 'notdelete' message.id %}">X</a></span
+      >
+    </li>
+    {% endfor %}
+  </ol>
+</div>
+{% else %}
+
+<h1 class="text-center m-5">No Notification</h1>
+
+{% endif %} {% endblock content %}

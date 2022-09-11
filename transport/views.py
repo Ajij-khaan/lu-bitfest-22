@@ -1,14 +1,18 @@
 
+from urllib import request
+from urllib.request import Request
 from django.shortcuts import redirect, render
 from mainapp.models import TransportUser
-from transport.forms import BusSignForm, RouteSignForm, UpdateProfileForm
+from transport.forms import BusSignForm, RouteSignForm, SendMessageForm, AddpassForm
 from django.contrib import messages
 from django.views import View
 from django.http.response import HttpResponse, HttpResponseRedirect
-from .models import BusInfo, RouteInfo
+from .models import BusInfo, RouteInfo, NumberOfPassenger
+from consumer.models import RequestBus
 
 
 # Bus Info
+
 
 class BusHomeView(View):
     def get(self, request):
@@ -149,3 +153,58 @@ def logout(request):
         return redirect("/")
     else:
         return redirect("/")
+
+
+class ShowrequestView(View):
+    def get(self, request):
+        transpost = request.session.get('transport')
+        if transpost:
+            allrequest = RequestBus.objects.all()
+            return render(request, 'requestbusshow.html', {'allrequest': allrequest})
+        else:
+            return redirect("/")
+
+
+class AddmessageView(View):
+    def get(self, request, id):
+        transpost = request.session.get('transport')
+        myrquest = RequestBus.objects.get(id=id)
+        if transpost:
+            form = SendMessageForm()
+            return render(request, 'send_message.html', {'form': form})
+        else:
+            return redirect("/")
+
+    def post(self, request, id):
+        form = SendMessageForm(request.POST)
+        myrquest = RequestBus.objects.get(id=id)
+        if form.is_valid():
+
+            obj = form.save(commit=False)
+            obj.request_user = myrquest.user
+            obj.root = myrquest.root_bus
+            obj.save()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+        return render(request, 'send_message.html', {'form': form})
+
+
+class AddpassView(View):
+    def get(self, request):
+        transpost = request.session.get('transport')
+        if transpost:
+            form = AddpassForm()
+            return render(request, 'numberofpass.html', {'form': form})
+        else:
+            return redirect("/")
+
+    def post(self, request):
+        form = AddpassForm(request.POST)
+
+        if form.is_valid():
+            messages.success(request, "successfully saved")
+            form.save()
+
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+        return render(request, 'numberofpass.html', {'form': form})

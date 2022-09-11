@@ -60,7 +60,7 @@ class RegisterTransportView(View):
                 obj.save()
                 messages.success(request, 'Successfully Saved')
                 form.save()
-                return redirect("transport_login")
+                return redirect("/transport_login")
         return render(request, 'register_transport.html', {'form': form})
 
 
