@@ -1,0 +1,31 @@
+{% extends 'base_student.html' %} <br />
+{% load static %} <br />
+{% block title %}Consumer{% endblock title %} <br />
+{% block content %} <br />
+
+{% if updateprofileteacher %}
+
+<div class="text-center">
+  <h1>{{updateprofileteacher.user_transport.user_name}}</h1>
+  <p>ID NO: {{updateprofileteacher.user_transport.id_no}}</p>
+  <p>Department: {{updateprofileteacher.department}}</p>
+  <p>Contact Number: {{updateprofileteacher.user_transport.contact_number}}</p>
+  <p>Pickup Stopaege: {{updateprofileteacher.user_transport.pickup_stopage}}</p>
+  <p>Designation: {{updateprofileteacher.designation}}</p>
+</div>
+
+{% endif %} <br />
+
+{% if updateprofilestudent %}
+<div class="d-flex justify-content-center">
+  <div>
+    <h4>Name: <b>{{updateprofilestudent.fullname}}</b></h4>
+    <p>Batch: <b>{{updateprofilestudent.batch}}</b></p>
+    <p>Section: <b>{{updateprofilestudent.section}}</b></p>
+    <p>ID NO: {{updateprofilestudent.user_consumer.id_no}}</p>
+    <p>Contact Number: {{updateprofilestudent.user_consumer.contact_number}}</p>
+    <p>Pickup Stopage: {{updateprofilestudent.user_consumer.pickup_stopage}}</p>
+  </div>
+</div>
+
+{% endif %} {% endblock content %}

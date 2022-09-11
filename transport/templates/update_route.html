@@ -1,6 +1,6 @@
 {% extends 'transport_base.html' %} <br />
 {% load static %} <br />
-{% block title %}Update Bus{% endblock title %} <br />
+{% block title %}Update Route{% endblock title %} <br />
 {% block content %} <br />
 
 {% if messages %}
@@ -23,7 +23,7 @@
 {% endif %}
 
 <div class="container">
-  <h1 class="mt-5 mb-5 text-center">Update Bus</h1>
+  <h1 class="mt-5 mb-5 text-center">Update Route</h1>
   <form action="" method="POST" class="w-50 m-auto box-shadow">
     {% csrf_token %} {% for fm in form %}
 
@@ -35,7 +35,7 @@
     {% endfor %}
 
     <br />
-    <button type="submit" class="btn btn-primary">Update Bus</button>
+    <button type="submit" class="btn btn-primary">Update Route</button>
   </form>
 </div>
 

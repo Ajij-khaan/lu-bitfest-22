@@ -9,5 +9,10 @@ urlpatterns = [
     path('addbus', AddBusView.as_view(), name="addbus"),
     path('updatebus/<int:id>/', EditBusInfo.as_view(), name="updatebus"),
     path('deletebus/<int:id>/', DeleteBusInfo.as_view(), name="deletebus"),
-
+    path('allroute', RouteallView.as_view(), name="allroute"),
+    path('addroute', AddRouteView.as_view(), name="addroute"),
+    path('updateroute/<int:id>/', EditRouteInfo.as_view(), name="updateroute"),
+    path('deleteroute/<int:id>/', DeleteRouteInfo.as_view(), name="deleteroute"),
+    path('logout', logout, name="logout"),
+    
 ]

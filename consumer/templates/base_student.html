@@ -20,7 +20,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="/transport">Lu Transport</a>
+        <a class="navbar-brand" href="/consumer">Lu Transport</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -35,7 +35,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/transport"
+              <a class="nav-link active" aria-current="page" href="/consumer"
                 >Dashboard</a
               >
             </li>
@@ -70,7 +70,7 @@
             </li>
           </ul>
           <div class="d-flex">
-            {% if request.session.transport %}
+            {% if request.session.consumer %}
             <a
               href="{% url 'logout' %}"
               class="btn btn-outline-success"
@@ -78,7 +78,24 @@
             >
               Logout
             </a>
-
+            {% endif %}
+            <br />
+            {% if updateprofilestudent or updateprofileteacher %}
+            <a
+              href="{% url 'showprofilfe' %}"
+              class="btn btn-outline-success"
+              type="submit"
+            >
+              Show Profile
+            </a>
+            {% else %}
+            <a
+              href="{% url 'addprofile' %}"
+              class="btn btn-outline-success"
+              type="submit"
+            >
+              Add Profile
+            </a>
             {% endif %}
           </div>
         </div>
