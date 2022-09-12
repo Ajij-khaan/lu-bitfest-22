@@ -274,6 +274,13 @@ class DeleteBusstopageInfo(View):
 
 def NumberOfPassengerview(request):
     numpass = NumberOfPassenger.objects.all()
+    c = 0
+    for x in numpass:
+        if x.mainslot.Route_Number == 4:
+            y = x.numberofpass
+            c = c+y
+
+    print(c)
     return render(request, 'num_of_passenger.html', {'numpass': numpass})
 
 

@@ -1,5 +1,6 @@
 
 import imp
+from pydoc import render_doc
 from django.shortcuts import redirect, render
 from consumer.views import *
 from django.views import View
@@ -7,9 +8,13 @@ from .forms import UpdateProfileTeacherForm, UpdateProfileStudentForm
 from mainapp.models import ConsumerUser, TransportUser
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from transport.models import UpdateStudentProfile, UpdateTransportProfile, RouteInfo
+from transport.models import BusInfo, UpdateStudentProfile, UpdateTransportProfile, RouteInfo
 from .forms import RequestBusForm
 from transport.models import SendMeessage, NumberOfPassenger
+
+
+def showneedbus(request):
+    return render(request, 'showneed_bus.html')
 
 
 class HomeConsumerView(View):
@@ -34,6 +39,7 @@ class HomeConsumerView(View):
 
             except:
                 updateprofilestudent = None
+
             return render(request, 'routeshowconsumer.html', {'updateprofileteacher': updateprofileteacher, 'updateprofilestudent': updateprofilestudent, 'allroute': allroute})
         else:
             return redirect("/")
@@ -188,5 +194,28 @@ def number_of_passeneger(request):
 
     except:
         updateprofilestudent = None
+
     numpass = NumberOfPassenger.objects.all()
-    return render(request, 'num_of_pass.html', {'numpass': numpass, 'updateprofilestudent': 'updateprofilestudent', 'updateprofileteacher': 'updateprofileteacher'})
+    bus = BusInfo.objects.all()
+    c = 0
+    for x in numpass:
+        if x.mainslot.Route_Number == 4:
+            y = x.numberofpass
+            c = c+y
+
+    print(c)
+
+    for cap in bus:
+        p = c % cap.capacity
+
+    print(p)
+
+    busforr4 = BusInfo.objects.all()[:p]
+    print(busforr4)
+    route_4_count = busforr4.count()
+    print(route_4_count)
+    missing_bus_route_4 = p - route_4_count
+
+    print(missing_bus_route_4)
+
+    return render(request, 'num_of_pass.html', {'busforr4': busforr4, 'route_4_count': route_4_count, 'missing_bus_route_4': missing_bus_route_4, 'updateprofilestudent': 'updateprofilestudent', 'updateprofileteacher': 'updateprofileteacher'})
