@@ -1,6 +1,5 @@
 
 import imp
-from pydoc import render_doc
 from django.shortcuts import redirect, render
 from consumer.views import *
 from django.views import View
@@ -11,10 +10,6 @@ from django.http import HttpResponseRedirect
 from transport.models import BusInfo, UpdateStudentProfile, UpdateTransportProfile, RouteInfo
 from .forms import RequestBusForm
 from transport.models import SendMeessage, NumberOfPassenger
-
-
-def showneedbus(request):
-    return render(request, 'showneed_bus.html')
 
 
 class HomeConsumerView(View):
@@ -218,4 +213,78 @@ def number_of_passeneger(request):
 
     print(missing_bus_route_4)
 
-    return render(request, 'num_of_pass.html', {'busforr4': busforr4, 'route_4_count': route_4_count, 'missing_bus_route_4': missing_bus_route_4, 'updateprofilestudent': 'updateprofilestudent', 'updateprofileteacher': 'updateprofileteacher'})
+    # Route 3
+
+    numpass = NumberOfPassenger.objects.all()
+    bus = BusInfo.objects.all()
+    t = 0
+    for x in numpass:
+        if x.mainslot.Route_Number == 3:
+            y = x.numberofpass
+            t = t+y
+
+    print(t)
+
+    for cap in bus:
+        p1 = t % cap.capacity
+
+    print(p1)
+
+    busforr3 = BusInfo.objects.all()[:p1]
+    print(busforr3)
+    route_3_count = busforr3.count()
+    print(route_3_count)
+    missing_bus_route_3 = p - route_3_count
+
+    print(missing_bus_route_3)
+
+    # Route 3
+
+    numpass = NumberOfPassenger.objects.all()
+    bus = BusInfo.objects.all()
+    m = 0
+    for x in numpass:
+        if x.mainslot.Route_Number == 2:
+            y = x.numberofpass
+            m = m+y
+
+    print(m)
+
+    for cap in bus:
+        p2 = m % cap.capacity
+
+    print(p2)
+
+    busforr2 = BusInfo.objects.all()[:p2]
+    print(busforr2)
+    route_2_count = busforr2.count()
+    print(route_2_count)
+    missing_bus_route_2 = p - route_2_count
+
+    print(missing_bus_route_2)
+
+    # Rout1
+    numpass = NumberOfPassenger.objects.all()
+    bus = BusInfo.objects.all()
+    l = 0
+    for x in numpass:
+        if x.mainslot.Route_Number == 2:
+            y = x.numberofpass
+            l = l+y
+
+    print(l)
+
+    for cap in bus:
+        p3 = l % cap.capacity
+
+    print(p3)
+
+    busforr1 = BusInfo.objects.all()[:p3]
+    print(busforr1)
+    route_1_count = busforr1.count()
+    print(route_1_count)
+    missing_bus_route_1 = p - route_1_count
+
+    print(missing_bus_route_1)
+
+    return render(request, 'num_of_pass.html', {'busforr4': busforr4, 'route_4_count': route_4_count, 'missing_bus_route_4': missing_bus_route_4, 'busforr3': busforr3, 'route_3_count': route_3_count, 'missing_bus_route_3': missing_bus_route_3, 'busforr2': busforr2, 'route_2_count': route_2_count, 'missing_bus_route_2': missing_bus_route_2, 'busforr1': busforr1, 'route_1_count': route_1_count, 'missing_bus_route_1': missing_bus_route_1, 'updateprofilestudent': 'updateprofilestudent', 'updateprofileteacher': 'updateprofileteacher'})
