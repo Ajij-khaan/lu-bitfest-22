@@ -3,6 +3,20 @@
 {% block title %}Regsiter Transport{% endblock title %} <br />
 {% block content %} <br />
 
+<style>
+  #id_user_name:focus,
+  #id_id_no:focus,
+  #id_contact_number:focus,
+  #id_password:focus,
+  #id_cpassword:focus{
+    border: 1px solid black;
+  }
+  .form-control:focus {
+    box-shadow: none;
+  }
+</style>
+
+
 {% if messages %}
 <ul class="messages">
   {% for message in messages %}
@@ -22,8 +36,10 @@
 </ul>
 {% endif %}
 
-<div class="container">
-  <h1 class="mt-5 mb-5 text-center">Consumer Registeration</h1>
+<div class="container card py-3 mb-3" style="border-radius: 1rem"">
+  <h5 class="fw-normal mb-3 pb-3 text-center mt-3" style="letter-spacing: 1px">
+    Consumer Registration
+  </h5>
   <form action="" method="POST" class="w-50 m-auto box-shadow">
     {% csrf_token %} {% for fm in form %}
 
@@ -37,7 +53,7 @@
       >Already have an account</a
     >
     <br />
-    <button type="submit" class="btn btn-primary">Register</button>
+    <button type="submit" class="btn btn-dark w-100">Register</button>
   </form>
 </div>
 

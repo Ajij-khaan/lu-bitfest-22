@@ -2,49 +2,64 @@
 {% block title %}Login Transport{% endblock title %} <br />
 {% load static %} {% block content %} <br />
 
+<style>
+  .sec:focus {
+    border: 1px solid black;
+  }
+
+  .form-control:focus {
+    box-shadow: none;
+  }
+</style>
+
 {% if messages %}
 <ul class="messages">
   {% for message in messages %}
-  <li
-    {%
-    if
-    message.tags
-    %}
-    class="bg-{{ message.tags }} p-4 text-center"
-    {%
-    endif
-    %}
-  >
+  <li {% if message.tags %} class="bg-{{ message.tags }} p-4 text-center" {% endif %}>
     {{ message }}
   </li>
   {% endfor %}
 </ul>
 {% endif %}
 
-<div class="container">
-  <h1 class="mt-5 mb-5 text-center">Consumer Login</h1>
 
-  <form action="" method="POST" class="w-50 m-auto box-shadow">
-    {% csrf_token %}
-    <div class="mb-3">
-      <label for="username" class="form-label">Username</label>
-      <input type="text" class="form-control" id="username" name="username" />
+<div class="container py-5 h-100">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col col-xl-10">
+      <div class="card" style="border-radius: 1rem">
+        <div class="row g-0">
+          <div class="row">
+            <div class="col-md-6 col-12 col-lg-6 d-none d-md-block">
+              <img src="https://i.ibb.co/0VN2ZqN/logImage.jpg" alt="login form" class="img-fluid h-100"
+                style="border-radius: 1rem 0 0 1rem" />
+            </div>
+            <div class="col-md-6 col-lg-6 d-flex align-items-center"">
+             <form action="" method="POST" class="w-100 m-auto box-shadow">
+              <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
+                Sign into your account
+              </h5>
+              {% csrf_token %}
+              <div class="form-outline mb-4">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control form-control-lg sec w-100" id="username" name="username" />
+              </div>
+              <div class="form-outline mb-4">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control form-control-lg sec w-100" id="exampleInputPassword1"
+                  name="password" />
+              </div>
+              <a href="/consumer_register" class="d-block text-decoration-none">Create new Account</a>
+              <br />
+              <button type="submit" class="btn  w-100 btn-dark">Login</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input
-        type="password"
-        class="form-control"
-        id="exampleInputPassword1"
-        name="password"
-      />
-    </div>
-    <a href="/consumer_register" class="d-block text-decoration-none"
-      >Create new Account</a
-    >
-    <br />
-    <button type="submit" class="btn btn-primary">Login</button>
-  </form>
+  </div>
 </div>
 
 {% endblock content %}
+</div>
+</div>

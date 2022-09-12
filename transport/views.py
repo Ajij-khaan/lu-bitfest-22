@@ -128,7 +128,7 @@ class EditRouteInfo(View):
             form.save()
             messages.success(
                 request, 'Congratulations!! Updated Successfully')
-            return redirect('/allroute')
+            return redirect('allroute')
         else:
             messages.warning(request, 'Not Updated')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -274,13 +274,7 @@ class DeleteBusstopageInfo(View):
 
 def NumberOfPassengerview(request):
     numpass = NumberOfPassenger.objects.all()
-    c = 0
-    for x in numpass:
-        if x.mainslot.Route_Number == 4:
-            y = x.numberofpass
-            c = c+y
-
-    print(c)
+    
     return render(request, 'num_of_passenger.html', {'numpass': numpass})
 
 

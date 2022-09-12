@@ -24,9 +24,11 @@
     <title>Home</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="/consumer">Lu Transport</a>
+        <a class="navbar-brand text-white fw-bold" href="/consumer"
+          >Lu Transport</a
+        >
         <button
           class="navbar-toggler"
           type="button"
@@ -39,20 +41,23 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="/consumer">Dashboard</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'busrequest' %}">Request Bus</a>
-            </li>
-
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a
-                class="nav-link active"
+                class="nav-link active text-white"
                 aria-current="page"
-                href="{% url 'allrouts' %}"
-                >Routes</a
+                href="/consumer"
+                >Dashboard</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'busrequest' %}"
+                >Request Bus</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'allrouts' %}"
+                >All Routs</a
               >
             </li>
           </ul>
@@ -60,7 +65,7 @@
             {% if request.session.consumer %}
             <a
               href="{% url 'logout' %}"
-              class="btn btn-outline-success"
+              class="btn btn-outline-light"
               type="submit"
             >
               Logout
@@ -70,7 +75,7 @@
             {% if updateprofilestudent or updateprofileteacher %}
             <a
               href="{% url 'showprofilfe' %}"
-              class="btn btn-outline-success ms-4"
+              class="btn btn-outline-light ms-4"
               type="submit"
             >
               Show Profile
@@ -78,7 +83,7 @@
             {% else %}
             <a
               href="{% url 'addprofile' %}"
-              class="btn btn-outline-success ms-4"
+              class="btn btn-outline-light ms-4"
               type="submit"
             >
               Add Profile
@@ -88,7 +93,7 @@
 
             <a
               href="{% url 'notifiactionbus' %}"
-              class="btn btn-outline-success ms-4"
+              class="btn btn-outline-light ms-4"
               type="submit"
             >
               <i class="fa-solid fa-bell"></i>

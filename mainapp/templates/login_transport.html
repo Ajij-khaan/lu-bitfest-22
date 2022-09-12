@@ -21,7 +21,7 @@
 </ul>
 {% endif %}
 
-<div class="container">
+<!-- <div class="container">
   <h1 class="mt-5 mb-5 text-center">Transport Login</h1>
 
   <form action="" method="POST" class="w-50 m-auto box-shadow">
@@ -45,6 +45,43 @@
     <br />
     <button type="submit" class="btn btn-primary">Login</button>
   </form>
+</div> -->
+
+<div class="container py-5 h-100">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col col-xl-10">
+      <div class="card p-3" style="border-radius: 1rem">
+        <div class="row g-0">
+          <div class="row">
+            <div class="col-md-6 col-12 col-lg-6 d-none d-md-block">
+              <img src="https://img.freepik.com/premium-photo/yellow-small-bus-urban-suburban-travel-car-with-empty-body-design-advertising-3d-illustration_101266-13886.jpg?w=826" alt="login form" class="img-fluid h-75 mt-5"
+                style="border-radius: 1rem 0 0 1rem" />
+            </div>
+            <div class="col-md-6 col-lg-6 d-flex align-items-center"">
+             <form action="" method="POST" class="w-100 m-auto box-shadow">
+              <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
+                Sign into your account
+              </h5>
+              {% csrf_token %}
+              <div class="form-outline mb-4">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control form-control-lg sec w-100" id="username" name="username" />
+              </div>
+              <div class="form-outline mb-4">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control form-control-lg sec w-100" id="exampleInputPassword1"
+                  name="password" />
+              </div>
+              <a href="/transport_register" class="d-block text-decoration-none">Create new Account</a>
+              <br />
+              <button type="submit" class="btn btn-primary w-100 btn-dark">Login</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock content %}

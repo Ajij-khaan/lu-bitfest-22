@@ -18,9 +18,11 @@
     <title>Home</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="/transport">Lu Transport</a>
+        <a class="navbar-brand fw-bold text-white" href="/transport"
+          >Lu Transport</a
+        >
         <button
           class="navbar-toggler"
           type="button"
@@ -35,22 +37,27 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/transport"
+              <a
+                class="nav-link active text-white"
+                aria-current="page"
+                href="/transport"
                 >Dashboard</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'addbus' %}">Add Bus</a>
+              <a class="nav-link text-white" href="{% url 'addbus' %}"
+                >Add Bus</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'showrequest' %}"
+              <a class="nav-link text-white" href="{% url 'showrequest' %}"
                 >Show Bus Request</a
               >
             </li>
 
             <li class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                class="nav-link dropdown-toggle text-white"
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -75,12 +82,14 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'NumberOfPassengerview' %}"
+              <a
+                class="nav-link text-white"
+                href="{% url 'NumberOfPassengerview' %}"
                 >Passenger</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'busstopageview' %}"
+              <a class="nav-link text-white" href="{% url 'busstopageview' %}"
                 >Bus Stopage</a
               >
             </li>
@@ -89,7 +98,7 @@
             {% if request.session.transport %}
             <a
               href="{% url 'logout' %}"
-              class="btn btn-outline-success"
+              class="btn btn-outline-light"
               type="submit"
             >
               Logout
