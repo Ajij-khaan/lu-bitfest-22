@@ -16,6 +16,17 @@ urlpatterns = [
     path('showrequest', ShowrequestView.as_view(), name="showrequest"),
     path('addmessage/<int:id>/', AddmessageView.as_view(), name="addmessage"),
     path('addpassview', AddpassView.as_view(), name="addpassview"),
+    path('addbusstopage', AddBustopageView.as_view(), name="addbusstopage"),
     path('logout', logout, name="logout"),
-
+    path('busstopageview', busstopageview, name="busstopageview"),
+    path('NumberOfPassengerview', NumberOfPassengerview,
+         name="NumberOfPassengerview"),
+    path('editbusstopage/<int:id>/',
+         EditBusstopageInfo.as_view(), name="editbusstopage"),
+    path('deletebusstopage/<int:id>/',
+         DeleteBusstopageInfo.as_view(), name="deletebusstopage"),
+    path('editpasseneger/<int:id>/',
+         EditPasenegerInfo.as_view(), name="editpasseneger"),
+    path('deletepassinfo/<int:id>/',
+         DeletePassenegerInfo.as_view(), name="deletepassinfo"),
 ]

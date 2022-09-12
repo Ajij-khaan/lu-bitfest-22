@@ -24,12 +24,3 @@ class RequestBus(models.Model):
     user = models.ForeignKey(ConsumerUser, on_delete=models.CASCADE)
     root_bus = models.ForeignKey(
         RouteInfo, on_delete=models.CASCADE)
-
-
-class NumberOfPassenger(models.Model):
-    role = models.CharField(
-        max_length=20, choices=Choice_Type, default='Student')
-
-    numberofpass = models.IntegerField()
-    time_slot = models.ForeignKey(
-        RouteInfo, on_delete=models.CASCADE)

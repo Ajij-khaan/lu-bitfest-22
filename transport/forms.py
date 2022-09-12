@@ -2,7 +2,7 @@ from cProfile import label
 import code
 from django.contrib.auth.models import User
 from django import forms
-from .models import BusInfo, RouteInfo, SendMeessage, NumberOfPassenger
+from .models import BusInfo, RouteInfo, SendMeessage, NumberOfPassenger, BusStopage
 from django.utils.translation import gettext_lazy as _
 from mainapp.models import TransportUser
 from transport.models import UpdateTransportProfile
@@ -80,5 +80,18 @@ class AddpassForm(forms.ModelForm):
             'role': forms.Select(attrs={'class': 'form-control'}),
             'numberofpass': forms.NumberInput(attrs={'class': 'form-control'}),
             'mainslot': forms.Select(attrs={'class': 'form-control'}),
+
+        }
+
+
+class BusStopageForm(forms.ModelForm):
+    class Meta:
+        model = BusStopage
+        fields = ['route_number', 'label', 'lattitude']
+
+        widgets = {
+            'route_number': forms.NumberInput(attrs={'class': 'form-control'}),
+            'label': forms.TextInput(attrs={'class': 'form-control'}),
+            'lattitude': forms.TextInput(attrs={'class': 'form-control'}),
 
         }

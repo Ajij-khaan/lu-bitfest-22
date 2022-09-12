@@ -7,6 +7,8 @@ from django.http import HttpResponseRedirect
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+
+from transport.models import SendMeessage
 from .forms import TransportSignForm, ConsumerUserForm
 # Create your views here.
 from .models import ConsumerUser, TransportUser

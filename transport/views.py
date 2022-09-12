@@ -3,11 +3,11 @@ from urllib import request
 from urllib.request import Request
 from django.shortcuts import redirect, render
 from mainapp.models import TransportUser
-from transport.forms import BusSignForm, RouteSignForm, SendMessageForm, AddpassForm
+from transport.forms import BusSignForm, RouteSignForm, SendMessageForm, AddpassForm, BusStopageForm
 from django.contrib import messages
 from django.views import View
 from django.http.response import HttpResponse, HttpResponseRedirect
-from .models import BusInfo, RouteInfo, NumberOfPassenger
+from .models import BusInfo, RouteInfo, NumberOfPassenger, BusStopage
 from consumer.models import RequestBus
 
 
@@ -205,6 +205,109 @@ class AddpassView(View):
             messages.success(request, "successfully saved")
             form.save()
 
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            return redirect("NumberOfPassengerview")
 
         return render(request, 'numberofpass.html', {'form': form})
+
+
+class AddBustopageView(View):
+    def get(self, request):
+        transpost = request.session.get('transport')
+        if transpost:
+            form = BusStopageForm()
+            return render(request, 'add_bus_stopage.html', {'form': form})
+        else:
+            return redirect("/")
+
+    def post(self, request):
+        form = BusStopageForm(request.POST)
+
+        if form.is_valid():
+            messages.success(request, "successfully saved")
+            form.save()
+
+            return redirect("busstopageview")
+
+        return render(request, 'add_bus_stopage.html', {'form': form})
+
+
+def busstopageview(request):
+    busstopage = BusStopage.objects.all()
+    return render(request, 'bustopageview.html', {'busstopage': busstopage})
+
+
+class EditBusstopageInfo(View):
+
+    def get(self, request, id):
+        transpost = request.session.get('transport')
+        if transpost:
+            pi = BusStopage.objects.get(id=id)
+            form = BusStopageForm(instance=pi)
+            return render(request, 'updatebusstopage.html', {'form': form})
+        else:
+            return redirect("/")
+
+    def post(self, request, id):
+        pi = BusStopage.objects.get(id=id)
+        form = BusStopageForm(request.POST, instance=pi)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, 'Congratulations!! Updated Successfully')
+            return redirect('busstopageview')
+        else:
+            messages.warning(request, 'Not Updated')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+class DeleteBusstopageInfo(View):
+    def get(self, request, id):
+        transpost = request.session.get('transport')
+        if transpost:
+            businfo = BusStopage.objects.get(id=id)
+            businfo.delete()
+            messages.success(request, "delete successfully")
+            return redirect("allroute")
+        else:
+            return redirect("/")
+
+
+def NumberOfPassengerview(request):
+    numpass = NumberOfPassenger.objects.all()
+    return render(request, 'num_of_passenger.html', {'numpass': numpass})
+
+
+class EditPasenegerInfo(View):
+
+    def get(self, request, id):
+        transpost = request.session.get('transport')
+        if transpost:
+            pi = NumberOfPassenger.objects.get(id=id)
+            form = AddpassForm(instance=pi)
+            return render(request, 'updatepass.html', {'form': form})
+        else:
+            return redirect("/")
+
+    def post(self, request, id):
+        pi = NumberOfPassenger.objects.get(id=id)
+        form = AddpassForm(request.POST, instance=pi)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, 'Congratulations!! Updated Successfully')
+            return redirect('NumberOfPassengerview')
+        else:
+            messages.warning(request, 'Not Updated')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+class DeletePassenegerInfo(View):
+    def get(self, request, id):
+        transpost = request.session.get('transport')
+        if transpost:
+            businfo = NumberOfPassenger.objects.get(id=id)
+            businfo.delete()
+            messages.success(request, "delete successfully")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        else:
+            return redirect("/")
